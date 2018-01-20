@@ -3,7 +3,7 @@
 include:
   - grub.install
 
-{%- for k, v in grub.default.iteritems() %}
+{%- for k, v in grub.default.get('present', {}).iteritems() %}
 grub_default_{{k}}:
   file.replace:
     - name: {{ grub.default_file }}
@@ -14,6 +14,15 @@ grub_default_{{k}}:
     - repl: {{k}}={{v}}
     {%- endif %}
     - append_if_not_found: True
+    - watch_in:
+      - cmd: grub_update
+{%- endfor %}
+
+{%- for param in grub.default.get('abesent', []).iteritems() %}
+grub_default_{{param}}_absent:
+  file.line:
+    - match: ^{{param}}=.*$
+    - mode: delete
     - watch_in:
       - cmd: grub_update
 {%- endfor %}
