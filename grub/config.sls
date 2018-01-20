@@ -21,6 +21,7 @@ grub_default_{{k}}:
 {%- for param in grub.default.get('absent', []) %}
 grub_default_{{param}}_absent:
   file.line:
+    - name: {{ grub.default_file }}
     - match: ^{{param}}=.*$
     - mode: delete
     - watch_in:
