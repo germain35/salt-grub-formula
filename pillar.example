@@ -1,0 +1,14 @@
+grub:
+  disable_messages: True
+  default:
+    GRUB_TIMEOUT: 0
+    GRUB_CMDLINE_LINUX_DEFAULT: 
+      - quiet
+    GRUB_CMDLINE_LINUX:
+      - quiet 
+      - splash 
+      - loglevel=0 
+      - vt.global_cursor_default=0 
+      - modprobe.blacklist=usb_storage 
+      - modprobe.blacklist=usbhid"
+    GRUB_GFXMODE: 1920x1080

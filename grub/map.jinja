@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja:ts=2:sw=2
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml "grub/defaults.yaml" as default_settings %}
+
+{% set map = salt['grains.filter_by']({
+  'Debian': {
+      'pkgs': ['grub2'],
+      'default_file': '/etc/default/grub',
+      'conf_dir': '/etc/grub.d',
+      'linux_conf_file': '/etc/grub.d/10_linux'
+  },
+}, grain='os_family', merge=salt['pillar.get']('grub:lookup')) %}
+
+{## Merge the flavor_map to the default settings ##}
+{% do default_settings.grub.update(map) %}
+
+{## Merge in pillar ##}
+{% set grub = salt['pillar.get'](
+  'grub',
+  default=default_settings.grub,
+  merge=True)
+%}
