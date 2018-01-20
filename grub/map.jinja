@@ -6,7 +6,7 @@
 
 {% set map = salt['grains.filter_by']({
   'Debian': {
-      'pkgs': ['grub2'],
+      'pkgs': ['grub-common'],
       'default_file': '/etc/default/grub',
       'conf_dir': '/etc/grub.d',
       'linux_conf_file': '/etc/grub.d/10_linux'
