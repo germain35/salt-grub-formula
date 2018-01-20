@@ -22,7 +22,7 @@ grub_default_{{k}}:
 grub_default_{{param}}_absent:
   file.line:
     - name: {{ grub.default_file }}
-    - match: ^{{param}}=.*$
+    - match: {{param}}=.*
     - mode: delete
     - watch_in:
       - cmd: grub_update
