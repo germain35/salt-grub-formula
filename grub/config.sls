@@ -18,7 +18,7 @@ grub_default_{{k}}:
       - cmd: grub_update
 {%- endfor %}
 
-{%- for param in grub.default.get('abesent', []) %}
+{%- for param in grub.default.get('absent', []) %}
 grub_default_{{param}}_absent:
   file.line:
     - match: ^{{param}}=.*$
@@ -28,7 +28,7 @@ grub_default_{{param}}_absent:
 {%- endfor %}
 
 {%- if grub.disable_messages %}
-grub_diable_messages:
+grub_disable_messages:
   file.comment:
     - name: {{ grub.linux_conf_file }}
     - regex: '^.*echo \"\$message\".*'
