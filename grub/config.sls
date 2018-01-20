@@ -32,7 +32,7 @@ grub_default_{{param}}_absent:
 grub_disable_messages:
   file.comment:
     - name: {{ grub.linux_conf_file }}
-    - regex: '^.*echo \"\$message\".*'
+    - regex: ^.*echo "\$message".*
     - watch_in:
       - cmd: grub_update
 {%- endif %}
