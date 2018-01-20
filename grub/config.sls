@@ -9,9 +9,9 @@ grub_default_{{k}}:
     - name: {{ grub.default_file }}
     - pattern: ^{{k}}=.*$
     {%- if v is list %}
-    - repl: '{{k}}=\"{{v|join(\' \')}}\"'
+    - repl: {{k}}="{{v|join(' ')}}"
     {%- else %}
-    - repl: '{{k}}={{v}}'
+    - repl: {{k}}={{v}}
     {%- endif %}
     - append_if_not_found: True
     - watch_in:
