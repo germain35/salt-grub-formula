@@ -18,7 +18,7 @@ grub_default_{{k}}:
       - cmd: grub_update
 {%- endfor %}
 
-{%- for param in grub.default.get('abesent', []).iteritems() %}
+{%- for param in grub.default.get('abesent', []) %}
 grub_default_{{param}}_absent:
   file.line:
     - match: ^{{param}}=.*$
